@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Delizia Restaurant</title>
+    <!-- Internal CSS for Modern Restaurant Website -->
+    <style>
+        :root {
+            --primary: #b23a48;
+            --secondary: #1a1a2e;
+            --accent: #f7d9c4;
+            --text: #fff;
+            --card-bg: #23233b;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+            --radius: 18px;
+            --transition: 0.3s cubic-bezier(.4, 0, .2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+            background: var(--secondary);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+            border-radius: var(--radius);
+        }
+
+        /* Header / Navigation Bar */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(26, 26, 46, 0.98);
+            box-shadow: var(--shadow);
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.2rem 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: var(--primary);
+            text-shadow: 1px 2px 8px #0002;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav li a {
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: background var(--transition), color var(--transition);
+            position: relative;
+        }
+
+        nav li a:hover,
+        nav li a.active {
+            background: var(--primary);
+            color: var(--accent);
+        }
+
+        /* Hamburger Menu (Mobile) */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .nav-toggle span {
+            width: 28px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+            transition: all var(--transition);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(26, 26, 46, 0.7), rgba(178, 58, 72, 0.5)), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 2rem 2rem 2rem;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            margin: auto;
+            color: var(--accent);
+            text-shadow: 1px 2px 12px #0008;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-content .btn {
+            background: var(--primary);
+            color: var(--accent);
+            padding: 0.9rem 2.2rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            transition: background var(--transition), transform var(--transition);
+        }
+
+        .hero-content .btn:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-3px) scale(1.04);
+        }
+
+        /* About Section */
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .about {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .about-img {
+            flex: 1 1 320px;
+            min-width: 260px;
+        }
+
+        .about-content {
+            flex: 2 1 340px;
+        }
+
+        .about-content h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            color: var(--accent);
+        }
+
+        /* Menu Section */
+        .menu-section h2 {
+            text-align: center;
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform var(--transition), box-shadow var(--transition);
+            position: relative;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 8px 32px rgba(178, 58, 72, 0.18);
+        }
+
+        .menu-card img {
+            height: 180px;
+            object-fit: cover;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .menu-card-body {
+            padding: 1.2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .menu-card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-card-desc {
+            font-size: 1rem;
+            color: #e6e6e6;
+            margin-bottom: 1rem;
+        }
+
+        .menu-card-price {
+            font-size: 1.1rem;
+            color: var(--primary);
+            font-weight: 600;
+            align-self: flex-end;
+        }
+
+        /* Gallery Section */
+        .gallery-section h2 {
+            text-align: center;
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .gallery-grid img {
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: transform var(--transition), box-shadow var(--transition);
+            aspect-ratio: 1/1;
+            object-fit: cover;
+        }
+
+        .gallery-grid img:hover {
+            transform: scale(1.06) rotate(-2deg);
+            box-shadow: 0 8px 32px rgba(178, 58, 72, 0.18);
+        }
+
+        /* Contact Section */
+        .contact-section h2 {
+            text-align: center;
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .contact-info {
+            flex: 1 1 260px;
+            min-width: 220px;
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .contact-form {
+            flex: 1 1 320px;
+            min-width: 260px;
+            background: var(--card-bg);
+            padding: 2rem 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .contact-form label {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: var(--accent);
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 0.7rem 1rem;
+            border: none;
+            border-radius: 8px;
+            background: #2d2d44;
+            color: var(--text);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            resize: none;
+            transition: box-shadow var(--transition);
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        .contact-form button {
+            background: var(--primary);
+            color: var(--accent);
+            padding: 0.8rem 0;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background var(--transition), color var(--transition);
+            margin-top: 0.5rem;
+        }
+
+        .contact-form button:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background: #181828;
+            color: #bdbdbd;
+            text-align: center;
+            padding: 2rem 1rem 1rem 1rem;
+            margin-top: 3rem;
+            border-top-left-radius: var(--radius);
+            border-top-right-radius: var(--radius);
+        }
+
+        .footer-social {
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+        }
+
+        .footer-social a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            background: var(--primary);
+            color: var(--accent);
+            border-radius: 50%;
+            font-size: 1.3rem;
+            transition: background var(--transition), color var(--transition), transform var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .footer-social a:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: scale(1.12) rotate(-8deg);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 900px) {
+            .about {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .about-img,
+            .about-content {
+                min-width: 0;
+            }
+
+            .contact-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1rem 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+                gap: 0.5rem;
+                background: rgba(26, 26, 46, 0.98);
+                position: absolute;
+                top: 64px;
+                left: 0;
+                padding: 1rem 0;
+                display: none;
+            }
+
+            nav ul.open {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: flex;
+                margin-left: auto;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: 2.5rem 0.7rem;
+            }
+
+            .menu-section h2,
+            .gallery-section h2,
+            .contact-section h2,
+            .about-content h2 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header / Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <div class="logo">Delizia</div>
+            <nav>
+                <div class="nav-toggle" id="navToggle" aria-label="Open navigation" tabindex="0">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul id="navLinks">
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Welcome to Delizia</h1>
+            <p>Experience the taste of Italy in every bite. Fresh, authentic, unforgettable.</p>
+            <a href="#menu" class="btn">Order Now</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <!-- About Image -->
+        <div class="about-img">
+            <img src="https://images.unsplash.com/photo-1516685018646-5499d0a7d42f?auto=format&fit=crop&w=600&q=80"
+                alt="Chef preparing Italian food">
+        </div>
+        <!-- About Content -->
+        <div class="about-content">
+            <h2>About Delizia</h2>
+            <p>
+                At Delizia, we bring the heart of Italian cuisine to your table. Our chefs use only the freshest
+                ingredients to craft dishes that are both traditional and innovative. Whether you're here for a romantic
+                dinner, a family gathering, or a quick lunch, our warm ambiance and attentive service will make your
+                experience truly special.
+            </p>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu-section" id="menu">
+        <h2>Our Menu</h2>
+        <div class="menu-grid">
+            <!-- Menu Item 1 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80"
+                    alt="Margherita Pizza with basil and cheese">
+                <div class="menu-card-body">
+                    <div>
+                        <div class="menu-card-title">Margherita Pizza</div>
+                        <div class="menu-card-desc">Classic pizza with fresh mozzarella, basil, and tomato sauce.</div>
+                    </div>
+                    <div class="menu-card-price">$12.99</div>
+                </div>
+            </div>
+            <!-- Menu Item 2 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80"
+                    alt="Pasta Carbonara Italian dish">
+                <div class="menu-card-body">
+                    <div>
+                        <div class="menu-card-title">Pasta Carbonara</div>
+                        <div class="menu-card-desc">Creamy pasta with pancetta, parmesan, and black pepper.</div>
+                    </div>
+                    <div class="menu-card-price">$14.50</div>
+                </div>
+            </div>
+            <!-- Menu Item 3 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1464306076886-debca5e8a6b0?auto=format&fit=crop&w=400&q=80"
+                    alt="Tiramisu dessert with cocoa">
+                <div class="menu-card-body">
+                    <div>
+                        <div class="menu-card-title">Tiramisu</div>
+                        <div class="menu-card-desc">Traditional Italian dessert with coffee-soaked ladyfingers and
+                            mascarpone.</div>
+                    </div>
+                    <div class="menu-card-price">$7.00</div>
+                </div>
+            </div>
+            <!-- Menu Item 4 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=400&q=80"
+                    alt="Bruschetta with tomatoes and basil">
+                <div class="menu-card-body">
+                    <div>
+                        <div class="menu-card-title">Bruschetta</div>
+                        <div class="menu-card-desc">Grilled bread topped with fresh tomatoes, garlic, and olive oil.
+                        </div>
+                    </div>
+                    <div class="menu-card-price">$8.50</div>
+                </div>
+            </div>
+            <!-- Menu Item 5 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1523987355523-c7b5b0723c6a?auto=format&fit=crop&w=400&q=80"
+                    alt="Risotto ai Funghi with mushrooms">
+                <div class="menu-card-body">
+                    <div>
+                        <div class="menu-card-title">Risotto ai Funghi</div>
+                        <div class="menu-card-desc">Creamy risotto with wild mushrooms and truffle oil.</div>
+                    </div>
+                    <div class="menu-card-price">$15.00</div>
+                </div>
+            </div>
+            <!-- Menu Item 6 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1506089676908-3592f7389d4d?auto=format&fit=crop&w=400&q=80"
+                    alt="Caprese Salad with mozzarella and tomatoes">
+                <div class="menu-card-body">
+                    <div>
+                        <div class="menu-card-title">Caprese Salad</div>
+                        <div class="menu-card-desc">Fresh mozzarella, tomatoes, basil, olive oil, and balsamic glaze.
+                        </div>
+                    </div>
+                    <div class="menu-card-price">$9.00</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section" id="gallery">
+        <h2>Gallery</h2>
+        <div class="gallery-grid">
+            <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80"
+                alt="Pasta Carbonara in gallery">
+            <img src="https://images.unsplash.com/photo-1464306076886-debca5e8a6b0?auto=format&fit=crop&w=400&q=80"
+                alt="Tiramisu dessert in gallery">
+            <img src="https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=400&q=80"
+                alt="Bruschetta in gallery">
+            <img src="https://images.unsplash.com/photo-1523987355523-c7b5b0723c6a?auto=format&fit=crop&w=400&q=80"
+                alt="Risotto ai Funghi in gallery">
+            <img src="https://images.unsplash.com/photo-1506089676908-3592f7389d4d?auto=format&fit=crop&w=400&q=80"
+                alt="Caprese Salad in gallery">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80"
+                alt="Margherita Pizza in gallery">
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <h2>Contact Us</h2>
+        <div class="contact-container">
+            <!-- Contact Info -->
+            <div class="contact-info">
+                <p><span>📍</span>123 Main Street, Cityville, Country</p>
+                <p><span>📞</span>(123) 456-7890</p>
+                <p><span>✉️</span>info@delizia.com</p>
+            </div>
+            <!-- Contact Form -->
+            <form class="contact-form" autocomplete="off">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required placeholder="Your Name">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required placeholder="Your Email">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="4" required placeholder="Your Message"></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-social">
+            <a href="#" aria-label="Facebook"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.326v21.348c0 .73.593 1.326 1.325 1.326h11.495v-9.294h-3.128v-3.622h3.128v-2.672c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12v9.294h6.116c.73 0 1.324-.596 1.324-1.326v-21.349c0-.733-.594-1.326-1.325-1.326z" />
+                </svg></a>
+            <a href="#" aria-label="Instagram"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.308.974.974 1.246 2.241 1.308 3.608.058 1.266.069 1.646.069 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.308 3.608-.974.974-2.241 1.246-3.608 1.308-1.266.058-1.646.069-4.85.069s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.308-.974-.974-1.246-2.241-1.308-3.608-.058-1.266-.069-1.646-.069-4.85s.012-3.584.07-4.85c.062-1.366.334-2.633 1.308-3.608.974-.974 2.241-1.246 3.608-1.308 1.266-.058 1.646-.069 4.85-.069zm0-2.163c-3.259 0-3.667.012-4.947.07-1.276.058-2.687.334-3.678 1.325-.991.991-1.267 2.402-1.325 3.678-.058 1.28-.07 1.688-.07 4.947s.012 3.667.07 4.947c.058 1.276.334 2.687 1.325 3.678.991.991 2.402 1.267 3.678 1.325 1.28.058 1.688.07 4.947.07s3.667-.012 4.947-.07c1.276-.058 2.687-.334 3.678-1.325.991-.991 1.267-2.402 1.325-3.678.058-1.28.07-1.688.07-4.947s-.012-3.667-.07-4.947c-.058-1.276-.334-2.687-1.325-3.678-.991-.991-2.402-1.267-3.678-1.325-1.28-.058-1.688-.07-4.947-.07z" />
+                    <circle cx="12" cy="12" r="3.5" />
+                    <circle cx="18.406" cy="5.594" r="1.44" />
+                </svg></a>
+            <a href="#" aria-label="Twitter"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M24 4.557a9.83 9.83 0 0 1-2.828.775 4.932 4.932 0 0 0 2.165-2.724c-.951.564-2.005.974-3.127 1.195a4.916 4.916 0 0 0-8.38 4.482c-4.083-.205-7.697-2.162-10.125-5.138a4.822 4.822 0 0 0-.664 2.475c0 1.708.87 3.216 2.188 4.099a4.904 4.904 0 0 1-2.229-.616c-.054 2.281 1.581 4.415 3.949 4.89a4.936 4.936 0 0 1-2.224.084c.627 1.956 2.444 3.377 4.6 3.417a9.867 9.867 0 0 1-6.102 2.104c-.396 0-.787-.023-1.175-.069a13.945 13.945 0 0 0 7.548 2.212c9.057 0 14.009-7.513 14.009-14.009 0-.213-.005-.425-.014-.636a10.012 10.012 0 0 0 2.457-2.548z" />
+                </svg></a>
+        </div>
+        <div>
+            &copy; 2026 Delizia Restaurant. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Responsive Navbar Script -->
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+        navToggle.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') navLinks.classList.toggle('open');
+        });
+        // Close nav on link click (mobile)
+        Array.from(navLinks.querySelectorAll('a')).forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+            });
+        });
+    </script>
+</body>
+
+</html>
